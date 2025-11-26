@@ -8,13 +8,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     text = (
         f"Привет, {user.first_name}!\n"
-        "Я викторина — отвечай на вопросы.\n"
+        "Ответь на несколько вопросов.\n"
         "Команды: /quiz — начать, /stats — статистика, /help — помощь"
     )
     await update.message.reply_text(text)
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Используй /quiz чтобы начать викторину.")
+    await update.message.reply_text("Используй /quiz чтобы начать опрос.")
 
 async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['score'] = 0
@@ -36,7 +36,7 @@ async def send_question(update_or_callback, context: ContextTypes.DEFAULT_TYPE):
         }
         save_stats(stats)
 
-        await update_or_callback.message.reply_text(f"Квиз завершён! Ваш результат: {score}/{total}")
+        await update_or_callback.message.reply_text(f"Опрос завершён! Ваш результат: {score}/{total}")
         return
 
     q = QUESTIONS[qindex]
